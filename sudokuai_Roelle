@@ -143,20 +143,20 @@ class SudokuAI(competitive_sudoku.sudokuai.SudokuAI):
 
             bestMove = None
             children = getChildren(game_state)
-            for i in xrange(1, depth):
-                value = float("-inf")
-                for child in children:
-                    score = minimax(child, depth, float("-inf"), float("inf"), not isMaximisingPlayer)
-                    if score > value:
-                        value, bestMove = score, child.moves
+            for i in range(1, depth):
+                # value = float("-inf")
+                # for child in children:
+                #     score = minimax(child, depth, float("-inf"), float("inf"), not isMaximisingPlayer)
+                #     if score > value:
+                #         value, bestMove = score, child.moves
 
                 children=getChildren(game_state)
                 if isMaximisingPlayer:
                     value = float("-inf")
                     for child in children:
-                        if minimax(child, depth-1, alpha, beta, not isMaximisingPlayer) > value:
+                        if minimax(child, i-1, alpha, beta, not isMaximisingPlayer) > value:
                             best_state = child
-                        eval = minimax(child, depth-1, alpha, beta, not isMaximisingPlayer)
+                        eval = minimax(child, i-1, alpha, beta, not isMaximisingPlayer)
                         value = max(value, eval)
                         alpha = max(alpha, eval)
                         if beta <= alpha:
@@ -168,14 +168,14 @@ class SudokuAI(competitive_sudoku.sudokuai.SudokuAI):
                 else:
                     value = float("inf")
                     for child in children:
-                        eval = minimax(child, depth-1, alpha, beta, not isMaximisingPlayer)
+                        eval = minimax(child, i-1, alpha, beta, not isMaximisingPlayer)
                         value = min(value, eval)
                         beta = min(beta, eval)
                         if beta <= alpha:
                             break
                     return value
 
-            return bestMove
+            #return bestMove
 
 
 
