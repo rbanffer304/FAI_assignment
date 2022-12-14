@@ -273,7 +273,7 @@ class SudokuAI(competitive_sudoku.sudokuai.SudokuAI):
             return bestMove
 
         depth = self.squares.count(SudokuBoard.empty)  # amount of empty squares
-        isMaximisingPlayer = False
+        isMaximisingPlayer = True
 
         minimax(game_state, depth, float("-inf"), float("inf"), isMaximisingPlayer)
 
