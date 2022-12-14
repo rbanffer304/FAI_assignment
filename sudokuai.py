@@ -122,11 +122,10 @@ class SudokuAI(competitive_sudoku.sudokuai.SudokuAI):
 
                 # if there are only 1 square in 1 or more regions, only compare these moves
                 empty_values = np.where(np.array(values) == 0)[0]
-                if len(empty_values) > 0:
-                    for value in empty_values:
-                        ij = self.dct_regions[region][value]
-                        for (coordinates, val) in self.all_moves_tuples:
-                            if ij[0] == coordinates[0] and ij[1] == coordinates[1]:
+                if len(empty_values) == 1:
+                    ij = self.dct_regions[region][values.index(0)]
+                    for (coordinates, val) in self.all_moves_tuples:
+                        if ij[0] == coordinates[0] and ij[1] == coordinates[1]:
                                 moves.append(Move(ij[0], ij[1], val))
 
             # dictionary with scores based on how many regions the move completes
